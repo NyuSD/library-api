@@ -5,7 +5,14 @@ import jakarta.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.*;
+
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property  = "id")
 public class LibraryBranch {
 
     @Id
@@ -24,6 +31,7 @@ public class LibraryBranch {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "city_id")
+    @JsonBackReference
     private City city;
 
     @ManyToMany
