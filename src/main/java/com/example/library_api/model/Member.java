@@ -5,7 +5,12 @@ import jakarta.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.*;
+
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property  = "id")
 public class Member {
 
     @Id

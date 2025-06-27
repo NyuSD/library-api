@@ -6,7 +6,14 @@ import jakarta.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.*;
+
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property  = "id")
 public class City {
 
     @Id
@@ -23,6 +30,7 @@ public class City {
     private int population;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<LibraryBranch> branches = new HashSet<>();
 
     public Long getId() { return id; }
